@@ -1,0 +1,40 @@
+import wollok.game.*
+import naves.*
+import lasers.*
+
+describe "Laser nave" {
+
+	const laserNave = new LaserNave(position = game.at(5, 5))
+
+	test "Ir a posicion siguiente" {
+		laserNave.irAPosicionSiguiente()
+		assert.equals(game.at(5, 6), laserNave.position())
+	}
+
+	test "Al ser disparado el laser avanza y se agega el visual" {
+		laserNave.serDisparado()
+		assert.equals(game.at(5, 6), laserNave.position()) // Va a la posicion siguiente que es uno mas arriba
+		assert.that(game.allVisuals().contains(laserNave)) // Añade el visual
+	}
+
+	test "Al chocar con algo el laser se destruye y ese algo tambien" {
+		const invader = new Dalek(position = game.at(7, 7))
+		game.addVisual(invader)
+		game.addVisual(laserNave)
+		laserNave.chocarCon(invader) 
+		assert.notThat(game.allVisuals().contains(laserNave)) // Añade el visual
+		assert.notThat(game.allVisuals().contains(invader)) // Añade el visual
+	}
+
+}
+
+describe "Invaders" {
+
+	const laserInvader = new LaserInvader(position = game.at(5, 5))
+
+	test "Ir a posicion siguiente" {
+		laserInvader.irAPosicionSiguiente()
+		assert.equals(game.at(5, 4), laserInvader.position())
+	}
+
+}

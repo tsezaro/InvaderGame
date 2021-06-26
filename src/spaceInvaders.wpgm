@@ -1,0 +1,14 @@
+import wollok.game.*
+import naves.*
+import lasers.*
+import niveles.*
+
+program SpaceInvaders {
+	game.title("Space Invaders")
+	game.height(22) //	Alto
+	game.width(22) 	//Ancho
+	game.cellSize(32) // Cambio el tamaño de las celdas
+	game.boardGround("nebulosa.jpg")
+	inicio.iniciar()
+	game.start()
+}

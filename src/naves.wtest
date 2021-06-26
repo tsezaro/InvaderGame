@@ -1,0 +1,38 @@
+import wollok.game.*
+import naves.*
+import lasers.*
+import niveles.*
+import flotaInvader.*
+
+describe "Nave" {
+
+	
+	test "Setear posicion" {
+		nave.position(game.at(4, 0))
+		assert.equals(game.at(4, 0), nave.position())
+	}
+
+	test "Disparar" {	
+		nave.disparar()
+		assert.equals(1, nave.lasersDisparados().size())
+	}
+	test "Nave choca y pierde una vida" {
+		nave.destruirse()
+		assert.equals(2,nave.cantVidas()) // ...
+	}
+
+}
+describe "Niveles"{
+	const dalek = new Dalek(position =game.at(10,-1))
+
+
+	test "Fila mas baja" {
+		flotaInvader.crearInvaders(6,4,0,18)
+		assert.equals(16,flotaInvader.posicionYMasBaja())
+	}
+	
+	test "Un invader esta por abajo del 0 en la posicion y" {
+		assert.notThat(dalek.estaDentroDeLaPantalla())
+	}
+	
+}
